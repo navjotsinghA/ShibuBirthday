@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Final Surprise 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to top right, #ffe6f0, #ffccf9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.6em;
+      color: #cc0066;
+      margin-bottom: 10px;
+      background: rgba(255,255,255,0.8);
+      padding: 15px 30px;
+      border-radius: 20px;
+      border: 3px dashed #ff99cc;
+    }
+
+    .thank-you {
+      font-size: 1.4em;
+      color: #663399;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 15px;
+      padding: 20px;
+      max-width: 90%;
+      margin-top: 20px;
+      line-height: 1.6;
+      box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+    }
+
+    .btn {
+      margin-top: 40px;
+      padding: 12px 30px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 25px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+      transition: background 0.3s;
+      z-index: 1;
+    }
+
+    .btn:hover {
+      background-color: #ff1493;
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 2em;
+      opacity: 0.6;
+      pointer-events: none;
+      animation: float 12s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { opacity: 0.8; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2em; }
+      .thank-you { font-size: 1.1em; padding: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💝 The Final Surprise 💝</h1>
+
+  <div class="thank-you">
+    From the bottom of my heart, <br><br>
+    💌 Thank you for being the most beautiful part of my world.<br>
+    🌸 Your smile lights up everything around you.<br>
+    💖 You are loved endlessly. <br><br>
+    This birthday surprise may end here... <br>
+    but my love, support, and smiles for you never will. 🎀<br><br>
+    Happy Birthday once again! 🎂🎉<br>
+    — With all the love in the world 💫
+  </div>
+
+  <button class="btn" onclick="goToStart()">🔄 Start Again</button>
+
+  <script>
+    function goToStart() {
+      window.location.href = "index.html";
+    }
+
+    const emojis = ["💖", "🎉", "🎁", "💫", "💕", "🎀", "🌸", "🧁", "🎂"];
+    for (let i = 0; i < 70; i++) {
+      const span = document.createElement("div");
+      span.className = "emoji";
+      span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      span.style.left = Math.random() * 100 + "vw";
+      span.style.top = Math.random() * 100 + "vh";
+      span.style.fontSize = `${18 + Math.random() * 20}px`;
+      span.style.animationDuration = `${6 + Math.random() * 8}s`;
+      document.body.appendChild(span);
+    }
+  </script>
+
+</body>
+</html>
