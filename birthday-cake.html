@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Surprise!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to right, #ffe6f0, #ffe0b2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo {
+      width: 300px;
+      height: 300px;
+      border-radius: 20px;
+      border: 5px solid #ff69b4;
+      box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .message {
+      margin-top: 30px;
+      font-size: 1.6em;
+      color: #cc3366;
+      max-width: 600px;
+      padding: 0 20px;
+      z-index: 1;
+    }
+
+    .next-btn,
+    .old-btn {
+      margin-top: 30px;
+      padding: 12px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 25px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+      transition: background 0.3s;
+      z-index: 1;
+    }
+
+    .next-btn:hover,
+    .old-btn:hover {
+      background-color: #ff1493;
+    }
+
+    /* Floating Hearts Background */
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      opacity: 0.7;
+      animation: floatAround linear infinite;
+    }
+
+    @keyframes floatAround {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translate(50px, -50px) scale(1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-30px, 30px) scale(1);
+        opacity: 0.8;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <img src="https://media1.tenor.com/m/CXauQUI6kAQAAAAC/uma-musume-pretty-derby-devour.gif" alt="Surprise Photo" class="photo" />
+
+  <div class="message">
+    This moment is just for you... 🌸<br />
+    A little surprise, a lot of love. Happy Birthday again! 🎉💖
+  </div>
+
+  <button class="next-btn" onclick="goToNextPage()">🎁 Next Surprise ➡️</button>
+  <button class="old-btn" onclick="goToOldPage()">🎁 Go Back ⬅️</button>
+
+  <script>
+    function goToNextPage() {
+      window.location.href = "birthday1.html";
+    }
+
+    function goToOldPage() {
+      window.location.href = "index.html";
+    }
+
+    // Fill background with animated hearts
+    const emojis = ["🎂", "🧿", "🙈", "💓", "💞"];
+    const total = 90;
+
+    for (let i = 0; i < total; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      heart.style.left = `${Math.random() * 100}vw`;
+      heart.style.top = `${Math.random() * 100}vh`;
+      heart.style.animationDuration = `${5 + Math.random() * 10}s`;
+      heart.style.fontSize = `${16 + Math.random() * 24}px`;
+      document.body.appendChild(heart);
+    }
+  </script>
+
+</body>
+</html>

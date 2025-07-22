@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>Birthday Surprise Login</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #ffe6f0, #ffe0b2);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      overflow: hidden;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .login-box {
+      background-color: white;
+      padding: 25px 20px;
+      border-radius: 15px;
+      border: 3px dashed #ff69b4;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 100%;
+      max-width: 360px;
+      z-index: 1;
+      position: relative;
+    }
+
+    h2 {
+      font-size: 2em;
+      margin-bottom: 15px;
+    }
+
+    h2::after {
+      content: '👀';
+      display: inline-block;
+      margin-left: 10px;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    input {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      font-size: 1em;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      background-color: #ff69b4;
+      color: white;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .hint {
+      font-size: 0.85em;
+      color: gray;
+      margin-bottom: 5px;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 10px;
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 1.5em;
+      z-index: 0;
+      animation: floatEmoji 10s linear infinite;
+      pointer-events: none;
+    }
+
+    .emoji span {
+      display: inline-block;
+      transition: transform 0.3s;
+      pointer-events: auto;
+    }
+
+    @keyframes floatEmoji {
+      0% { transform: translate(0, 0); opacity: 0.6; }
+      50% { transform: translate(40px, -40px); opacity: 1; }
+      100% { transform: translate(0, 0); opacity: 0.6; }
+    }
+
+    @media (max-width: 400px) {
+      h2 {
+        font-size: 1.6em;
+      }
+      input, button {
+        font-size: 0.95em;
+        padding: 10px;
+      }
+      .emoji {
+        font-size: 1.2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Login</h2>
+    <input id="username" type="text" placeholder="Username" />
+    <div class="hint">Hint: Your nickname given by your brother.</div>
+    <input id="password" type="password" placeholder="Password" />
+    <div class="hint">Hint: Your brother's nickname given by you.</div>
+    <button onclick="checkLogin()">Login</button>
+    <div id="error" class="error-message"></div>
+  </div>
+
+  <script>
+    function checkLogin() {
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value.trim();
+      const errorDiv = document.getElementById('error');
+      if (user === 'Pineapple' && pass === 'Mogli') {
+        window.location.href = 'birthday-cake.html';
+      } else {
+        errorDiv.innerText = 'Oops! Something is not right. Try again, silly! ❤️';
+      }
+    }
+
+    const emojis = ["💖", "🎉", "💫", "🌈", "😻", "💕", "💗", "💘", "🎁", "🧁", "✨", "🎂", "🥳"];
+    const randomPos = () => Math.floor(Math.random() * 95) + '%';
+    const randomAnimDuration = () => Math.floor(Math.random() * 10 + 5) + 's';
+
+    for (let i = 0; i < 100; i++) {
+      const emoji = document.createElement('div');
+      emoji.className = 'emoji';
+      emoji.style.top = randomPos();
+      emoji.style.left = randomPos();
+      emoji.style.animationDuration = randomAnimDuration();
+
+      const inner = document.createElement('span');
+      inner.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+      inner.onclick = () => {
+        inner.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        inner.style.transform = 'scale(1.5)';
+        setTimeout(() => inner.style.transform = 'scale(1)', 300);
+      };
+
+      emoji.appendChild(inner);
+      document.body.appendChild(emoji);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to right, #ffe6f0, #ffe0b2);
+    }
+
+    h1 {
+      font-size: 2.8em;
+      color: #ff3399;
+      animation: bounce 2s infinite;
+      z-index: 10;
+      position: relative;
+      background: rgba(255, 255, 255, 0.85);
+      display: inline-block;
+      padding: 20px 30px;
+      border-radius: 20px;
+      border: 4px solid #ffb6c1;
+      box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .photo {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      border: 4px solid #ffb6c1;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(255, 182, 193, 0.4);
+    }
+
+    .photo img, .photo .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 11px;
+      backface-visibility: hidden;
+    }
+
+    .photo .back {
+      background: #fff0f5;
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: rotateY(180deg);
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .photo.flipped {
+      transform: rotateY(180deg) scale(1.8);
+      z-index: 5;
+    }
+
+    .center-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 1;
+      max-width: 700px;
+    }
+
+    .custom-message {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #663399;
+    }
+
+    .instruction {
+      margin-top: 15px;
+      font-size: 1.1em;
+      color: #555;
+      font-style: italic;
+    }
+
+    .next-btn {
+      margin-top: 40px;
+      padding: 12px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 25px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+      transition: background 0.3s;
+    }
+
+    .next-btn:hover {
+      background-color: #ff1493;
+    }
+    .old-btn {
+      margin-top: 40px;
+      padding: 12px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 25px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+      transition: background 0.3s;
+    }
+
+    .old-btn:hover {
+      background-color: #ff1493;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="center-container">
+    <h1>Happy Birthday, My Lovely Sister! 🎂💖</h1>
+    <div class="instruction">Click a photo and you will see magic ✨</div>
+    <div class="custom-message">
+      You're the sunshine in our lives. Stay blessed and keep glowing! 💕
+    </div>
+    <button class="next-btn" onclick="goToNextPage()">🎁 Surprise for you ➡️</button>
+    <button class="old-btn" onclick="goToOldPage()">🎁 Go Back ⬅️</button>
+  </div>
+
+  <div id="photo-container"></div>
+
+  <script>
+    const messages = [
+      "You're amazing! 💫",
+      "Shine always 🌟",
+      "Love you to the moon! 🌙",
+      "Cutest girl ever! 😘",
+      "Stay happy forever! 🧁",
+      "Keep smiling 😄",
+      "Always my favorite! 🩷",
+      "Birthday hugs! 🤗"
+    ];
+
+    const imageUrls = [
+      "https://i.imgur.com/abcd123.jpg",
+      "https://i.imgur.com/efgh456.jpg",
+      "https://i.imgur.com/ijkl789.jpg",
+      "https://i.imgur.com/mnop012.jpg",
+      "https://i.imgur.com/qrst345.jpg",
+      "https://i.imgur.com/uvwx678.jpg",
+      "https://i.imgur.com/yzab901.jpg",
+      "https://i.imgur.com/cdef234.jpg"
+    ];
+
+    const container = document.getElementById('photo-container');
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    const baseRadiusX = 550; // increased for more spacing
+    const baseRadiusY = 390;
+
+    for (let i = 0; i < imageUrls.length; i++) {
+      const angle = (i / imageUrls.length) * Math.PI * 2;
+      const dynamicX = baseRadiusX + 50 * Math.sin(angle);
+      const x = centerX + dynamicX * Math.cos(angle) - 60;
+      const y = centerY + baseRadiusY * Math.sin(angle) - 60;
+
+      const photo = document.createElement('div');
+      photo.className = 'photo';
+      photo.style.left = `${x}px`;
+      photo.style.top = `${y}px`;
+
+      const front = document.createElement('img');
+      front.src = imageUrls[i];
+
+      const back = document.createElement('div');
+      back.className = 'back';
+      back.innerText = messages[i];
+
+      photo.appendChild(front);
+      photo.appendChild(back);
+
+      photo.onclick = () => {
+        photo.classList.toggle('flipped');
+      };
+
+      container.appendChild(photo);
+    }
+
+    function goToNextPage() {
+      window.location.href = "surprise.html";
+    }
+    function goToOldPage() {
+      window.location.href = "birthday-cake.html"; // <- Change to your actual next page
+    }
+  </script>
+</body>
+</html>
